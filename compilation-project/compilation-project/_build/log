@@ -1,0 +1,60 @@
+# dune build @check
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /home/paula/.cache/dune/db
+# Workspace root: /home/paula/workspace/compilation-project/compilation-project
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; installed_env =
+#      map
+#        { "INSIDE_DUNE" :
+#            "/home/paula/workspace/compilation-project/compilation-project/_build/default"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; instrument_with = []
+#  }
+$ /usr/bin/ocamlc.opt -config > /tmp/dune_c10a89_output
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -I utils/.utils.objs/byte -no-alias-deps -opaque -o utils/.utils.objs/byte/utils.cmo -c -impl utils/utils.ml-gen)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -I expr/.main.eobjs/byte -no-alias-deps -opaque -o expr/.main.eobjs/byte/dune__exe.cmo -c -impl expr/.main.eobjs/dune__exe.ml-gen)
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl expr/main.ml) > _build/default/expr/.main.eobjs/dune__exe__Main.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl expr/compiler.ml) > _build/default/expr/.main.eobjs/dune__exe__Compiler.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl utils/location.ml) > _build/default/utils/.utils.objs/utils__Location.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf utils/location.mli) > _build/default/utils/.utils.objs/utils__Location.intf.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf expr/compiler.mli) > _build/default/expr/.main.eobjs/dune__exe__Compiler.intf.d
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I expr/common/.common.objs/byte -no-alias-deps -opaque -o expr/common/.common.objs/byte/binOp.cmi -c -intf expr/common/binOp.mli)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -I pfx/basic/.basicPfx.objs/byte -no-alias-deps -opaque -o pfx/basic/.basicPfx.objs/byte/basicPfx.cmo -c -impl pfx/basic/basicPfx.ml-gen)
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf expr/main.mli) > _build/default/expr/.main.eobjs/dune__exe__Main.intf.d
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -I expr/basic/.basicExpr.objs/byte -no-alias-deps -opaque -o expr/basic/.basicExpr.objs/byte/basicExpr.cmo -c -impl expr/basic/basicExpr.ml-gen)
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl expr/basic/toPfx.ml) > _build/default/expr/basic/.basicExpr.objs/basicExpr__ToPfx.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf pfx/basic/ast.mli) > _build/default/pfx/basic/.basicPfx.objs/basicPfx__Ast.intf.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf pfx/basic/eval.mli) > _build/default/pfx/basic/.basicPfx.objs/basicPfx__Eval.intf.d
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I expr/common/.common.objs/byte -intf-suffix .ml -no-alias-deps -opaque -o expr/common/.common.objs/byte/binOp.cmo -c -impl expr/common/binOp.ml)
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl pfx/basic/ast.ml) > _build/default/pfx/basic/.basicPfx.objs/basicPfx__Ast.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl pfx/basic/eval.ml) > _build/default/pfx/basic/.basicPfx.objs/basicPfx__Eval.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf expr/basic/ast.mli) > _build/default/expr/basic/.basicExpr.objs/basicExpr__Ast.intf.d
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I utils/.utils.objs/byte -no-alias-deps -opaque -open Utils -o utils/.utils.objs/byte/utils__Location.cmi -c -intf utils/location.mli)
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf expr/basic/toPfx.mli) > _build/default/expr/basic/.basicExpr.objs/basicExpr__ToPfx.intf.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl expr/basic/ast.ml) > _build/default/expr/basic/.basicExpr.objs/basicExpr__Ast.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -intf expr/basic/eval.mli) > _build/default/expr/basic/.basicExpr.objs/basicExpr__Eval.intf.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl expr/basic/eval.ml) > _build/default/expr/basic/.basicExpr.objs/basicExpr__Eval.impl.d
+$ (cd _build/default && /usr/bin/ocamllex -q -o pfx/basic/lexer.ml pfx/basic/lexer.mll)
+$ (cd _build/default && /usr/bin/ocamllex -q -o expr/basic/lexer.ml expr/basic/lexer.mll)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I pfx/basic/.basicPfx.objs/byte -I utils/.utils.objs/byte -no-alias-deps -opaque -open BasicPfx -o pfx/basic/.basicPfx.objs/byte/basicPfx__Ast.cmi -c -intf pfx/basic/ast.mli)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I utils/.utils.objs/byte -intf-suffix .ml -no-alias-deps -opaque -open Utils -o utils/.utils.objs/byte/utils__Location.cmo -c -impl utils/location.ml)
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl pfx/basic/lexer.ml) > _build/default/pfx/basic/.basicPfx.objs/basicPfx__Lexer.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl expr/basic/lexer.ml) > _build/default/expr/basic/.basicExpr.objs/basicExpr__Lexer.impl.d
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I pfx/basic/.basicPfx.objs/byte -I utils/.utils.objs/byte -no-alias-deps -opaque -open BasicPfx -o pfx/basic/.basicPfx.objs/byte/basicPfx__Eval.cmi -c -intf pfx/basic/eval.mli)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I pfx/basic/.basicPfx.objs/byte -I utils/.utils.objs/byte -intf-suffix .ml -no-alias-deps -opaque -open BasicPfx -o pfx/basic/.basicPfx.objs/byte/basicPfx__Ast.cmo -c -impl pfx/basic/ast.ml)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I pfx/basic/.basicPfx.objs/byte -I utils/.utils.objs/byte -intf-suffix .ml -no-alias-deps -opaque -open BasicPfx -o pfx/basic/.basicPfx.objs/byte/basicPfx__Eval.cmo -c -impl pfx/basic/eval.ml)
+> File "pfx/basic/eval.ml", line 17, characters 4-12:
+> 17 |   | DefineMe :: q , stack          -> Ok (q, stack)
+>          ^^^^^^^^
+> Error: Unbound constructor DefineMe
+[2]
