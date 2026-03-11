@@ -1,4 +1,4 @@
-(* The type of the commands for the stack machine ls *)
+(* The type of the commands for the stack machine*)
 
 type command =
   | Push of int 
