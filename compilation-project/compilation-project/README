@@ -109,6 +109,11 @@ Progress
 
 ===============
 
+How to test
+
+echo "<expression>" > test.expr && dune exec expr/main.exe test.expr
+===============
+
 Know bugs and issues
 --------------------
 
