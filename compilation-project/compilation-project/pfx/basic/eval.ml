@@ -14,7 +14,7 @@ let step state =
   match state with
   | [], _ -> Error("Nothing to step",state)
   (* Valid configurations *)
-  | Push n :: q , stack          -> Ok (q, stack)
+  | Push n :: q , stack -> Ok (q, n :: stack)
   | Pop :: q, _ :: stack -> Ok (q, stack)
   | Swap :: q, x :: y :: stack -> Ok (q, y :: x :: stack)
   | Add :: q, x :: y :: stack -> Ok (q, (x + y):: stack)
