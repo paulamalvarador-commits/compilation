@@ -8,12 +8,20 @@ module MenhirBasics = struct
       raise Error
   
   type token = 
+    | SWAP
+    | SUB
+    | REM
+    | PUSH
+    | POP
+    | MUL
     | INT of 
-# 12 "pfx/basic/parser.mly"
+# 14 "pfx/basic/parser.mly"
        (int)
-# 15 "pfx/basic/parser.ml"
+# 21 "pfx/basic/parser.ml"
   
     | EOF
+    | DIV
+    | ADD
   
 end
 
@@ -24,7 +32,7 @@ include MenhirBasics
   (* Ocaml code here*)
 
 
-# 28 "pfx/basic/parser.ml"
+# 36 "pfx/basic/parser.ml"
 
 type ('s, 'r) _menhir_state
 
@@ -34,18 +42,34 @@ and _menhir_box_program =
 let _menhir_action_1 =
   fun i ->
     (
-# 30 "pfx/basic/parser.mly"
+# 32 "pfx/basic/parser.mly"
                    ( i,[] )
-# 40 "pfx/basic/parser.ml"
+# 48 "pfx/basic/parser.ml"
      : (Ast.program))
 
 let _menhir_print_token : token -> string =
   fun _tok ->
     match _tok with
+    | SWAP ->
+        "SWAP"
+    | SUB ->
+        "SUB"
+    | REM ->
+        "REM"
+    | PUSH ->
+        "PUSH"
+    | POP ->
+        "POP"
+    | MUL ->
+        "MUL"
     | INT _ ->
         "INT"
     | EOF ->
         "EOF"
+    | DIV ->
+        "DIV"
+    | ADD ->
+        "ADD"
 
 let _menhir_fail : unit -> 'a =
   fun () ->
@@ -80,7 +104,7 @@ let program =
     let MenhirBox_program v = _menhir_run_0 _menhir_stack _menhir_lexbuf _menhir_lexer in
     v
 
-# 32 "pfx/basic/parser.mly"
+# 34 "pfx/basic/parser.mly"
   
 
-# 87 "pfx/basic/parser.ml"
+# 111 "pfx/basic/parser.ml"
