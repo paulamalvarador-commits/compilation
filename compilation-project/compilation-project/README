@@ -10,19 +10,28 @@ AUTHORS
 Description of the project
 --------------------------
 
-This μ-project is a very simple compiler…
+This μ-project consists in building a simple compiler for arithmetic expressions.
+
+We work with two small languages:
+
+- Expr: a high-level language with arithmetic expressions
+- Pfx: a stack-based language executed by a virtual machine
+
+The goal is to understand how an expression can be:
+
+1. parsed into an abstract syntax tree (AST)
+2. evaluated directly
+3. translated into a lower-level language (Pfx)
+
+Up to exercise 6, we focused on parsing and evaluating expressions.
+
 
 ===============
 
 Sources
 -------
 
-Git repository: https://gitlab-df.imt-atlantique.fr/...
-
-(obviously, you _will_ use a version control system such as Git, IMT
-Atlantique provides a project management platform: use it!)
-
-Release : tag 1.0 or commit acdeacdacdacdacd
+Git repository: https://github.com/paulamalvarador-commits/compilation
 
 ===============
 
@@ -31,21 +40,49 @@ How to…
 
 …retrieve the sources?
 
-  git clone https://gitlab-df.imt-atlantique.fr/...
+  git clone https://github.com/paulamalvarador-commits/compilation
 
 …compile?
 
-  dune …
+  dune build
 
 …execute and test?
 
-  dune exec ./pfx/pfxVM.exe -- TESTFILE.pfx -a 12 -a 52
+To evaluate an expression:
 
+  dune exec expr/main.exe expr/basic/tests/an_example.expr
+
+To quickly test:
+
+  echo "3+4*5" > test.expr
+  dune exec expr/main.exe test.expr
 
 ===============
 
 Structure of the project
 ------------------------
+
+- expr/: handles expressions (parsing and evaluation)
+  - basic/
+    - ast.ml: defines the structure of expressions (Const, Binop, etc.)
+    - eval.ml: evaluates expressions
+    - lexer.mll: converts text into tokens
+    - parser.mly: builds the AST from tokens
+    - toPfx.ml: (to be completed later) translates Expr to Pfx
+  - common/
+    - binOp.ml: defines arithmetic operations (+, -, *, /, %)
+  - main.ml: runs the expression evaluator
+  - compiler.ml: will be used for translation to Pfx
+
+- pfx/: implements a stack-based virtual machine
+  - basic/
+    - ast.ml: defines Pfx instructions (Push, Add, etc.)
+    - eval.ml: executes Pfx programs
+    - lexer.mll / parser.mly: parse Pfx programs
+  - pfxVM.ml: main file for executing Pfx programs
+
+- utils/: helper modules (e.g., file location handling)
+
 
 The project is organized as following:
 
@@ -54,64 +91,183 @@ group of files, etc.
 
 You may also show the file tree as the following example:
 
-project
+.
 ├── README
+├── README:Zone.Identifier
+├── _build
+│   ├── default
+│   │   ├── expr
+│   │   │   ├── basic
+│   │   │   │   ├── ast.ml
+│   │   │   │   ├── ast.mli
+│   │   │   │   ├── basicExpr.a
+│   │   │   │   ├── basicExpr.cma
+│   │   │   │   ├── basicExpr.cmxa
+│   │   │   │   ├── basicExpr.cmxs
+│   │   │   │   ├── basicExpr.ml-gen
+│   │   │   │   ├── eval.ml
+│   │   │   │   ├── eval.mli
+│   │   │   │   ├── lexer.ml
+│   │   │   │   ├── lexer.mll
+│   │   │   │   ├── parser.conflicts
+│   │   │   │   ├── parser.ml
+│   │   │   │   ├── parser.mli
+│   │   │   │   ├── parser.mly
+│   │   │   │   ├── parser__mock.ml.mock
+│   │   │   │   ├── parser__mock.mli.inferred
+│   │   │   │   ├── toPfx.ml
+│   │   │   │   └── toPfx.mli
+│   │   │   ├── common
+│   │   │   │   ├── binOp.ml
+│   │   │   │   ├── binOp.mli
+│   │   │   │   ├── common.a
+│   │   │   │   ├── common.cma
+│   │   │   │   ├── common.cmxa
+│   │   │   │   └── common.cmxs
+│   │   │   ├── compiler.exe
+│   │   │   ├── compiler.ml
+│   │   │   ├── compiler.mli
+│   │   │   ├── main.exe
+│   │   │   ├── main.ml
+│   │   │   └── main.mli
+│   │   ├── pfx
+│   │   │   ├── basic
+│   │   │   │   ├── ast.ml
+│   │   │   │   ├── ast.mli
+│   │   │   │   ├── basicPfx.a
+│   │   │   │   ├── basicPfx.cma
+│   │   │   │   ├── basicPfx.cmxa
+│   │   │   │   ├── basicPfx.cmxs
+│   │   │   │   ├── basicPfx.ml-gen
+│   │   │   │   ├── eval.ml
+│   │   │   │   ├── eval.mli
+│   │   │   │   ├── lexer.ml
+│   │   │   │   ├── lexer.mll
+│   │   │   │   ├── parser.conflicts
+│   │   │   │   ├── parser.ml
+│   │   │   │   ├── parser.mli
+│   │   │   │   ├── parser.mly
+│   │   │   │   ├── parser__mock.ml.mock
+│   │   │   │   └── parser__mock.mli.inferred
+│   │   │   ├── pfxVM.exe
+│   │   │   ├── pfxVM.ml
+│   │   │   └── pfxVM.mli
+│   │   └── utils
+│   │       ├── location.ml
+│   │       ├── location.mli
+│   │       ├── utils.a
+│   │       ├── utils.cma
+│   │       ├── utils.cmxa
+│   │       ├── utils.cmxs
+│   │       └── utils.ml-gen
+│   └── log
 ├── dune-project
-├── expr: the expr compiler
+├── dune-project.save
+├── dune-project:Zone.Identifier
+├── expr
 │   ├── README
+│   ├── README:Zone.Identifier
 │   ├── basic
 │   │   ├── ast.ml
+│   │   ├── ast.ml:Zone.Identifier
 │   │   ├── ast.mli
+│   │   ├── ast.mli:Zone.Identifier
 │   │   ├── dune
+│   │   ├── dune:Zone.Identifier
 │   │   ├── eval.ml
+│   │   ├── eval.ml:Zone.Identifier
 │   │   ├── eval.mli
+│   │   ├── eval.mli:Zone.Identifier
 │   │   ├── lexer.mll
+│   │   ├── lexer.mll:Zone.Identifier
 │   │   ├── parser.mly
-│   │   ├── tests: for tests
-│   │   │   └── an_example.expr
-│   │   ├── toPfx.ml             <- To edit
-│   │   └── toPfx.mli
+│   │   ├── parser.mly:Zone.Identifier
+│   │   ├── tests
+│   │   │   ├── an_example.expr
+│   │   │   └── an_example.expr:Zone.Identifier
+│   │   ├── toPfx.ml
+│   │   ├── toPfx.ml:Zone.Identifier
+│   │   ├── toPfx.mli
+│   │   └── toPfx.mli:Zone.Identifier
 │   ├── common
 │   │   ├── binOp.ml
+│   │   ├── binOp.ml:Zone.Identifier
 │   │   ├── binOp.mli
-│   │   └── dune
-│   ├── compiler.ml: main file for the expr compiler
-│   ├── dune
-│   ├── fun: the expr parser for section 7
-│   │   ├── ast.ml
-│   │   ├── ast.mli
-│   │   ├── lexer.mll
-│   │   └── parser.mly
-│   └── main.ml
-├── pfx: the pfx VM
-│   ├── basic
-│   │   ├── ast.ml               <- To edit
-│   │   ├── ast.mli
+│   │   ├── binOp.mli:Zone.Identifier
 │   │   ├── dune
-│   │   ├── eval.ml              <- To edit
+│   │   └── dune:Zone.Identifier
+│   ├── compiler.ml
+│   ├── compiler.ml:Zone.Identifier
+│   ├── dune
+│   ├── dune:Zone.Identifier
+│   ├── fun
+│   │   ├── ast.ml
+│   │   ├── ast.ml:Zone.Identifier
+│   │   ├── ast.mli
+│   │   ├── ast.mli:Zone.Identifier
+│   │   ├── lexer.mll
+│   │   ├── lexer.mll:Zone.Identifier
+│   │   ├── parser.mly
+│   │   └── parser.mly:Zone.Identifier
+│   ├── main.ml
+│   └── main.ml:Zone.Identifier
+├── pfx
+│   ├── basic
+│   │   ├── ast.ml
+│   │   ├── ast.ml:Zone.Identifier
+│   │   ├── ast.mli
+│   │   ├── ast.mli:Zone.Identifier
+│   │   ├── dune
+│   │   ├── dune:Zone.Identifier
+│   │   ├── eval.ml
+│   │   ├── eval.ml:Zone.Identifier
 │   │   ├── eval.mli
-│   │   ├── lexer.mll            <- To edit
-│   │   ├── parser.mly           <- To edit
-│   │   └── tests: for tests
-│   │       └── ok_prog.pfx
-│   └── pfxVM.ml: main file for the pfx VM
+│   │   ├── eval.mli:Zone.Identifier
+│   │   ├── lexer.mll
+│   │   ├── lexer.mll:Zone.Identifier
+│   │   ├── parser.mly
+│   │   ├── parser.mly:Zone.Identifier
+│   │   └── tests
+│   │       ├── ok_prog.pfx
+│   │       └── ok_prog.pfx:Zone.Identifier
+│   ├── dune
+│   ├── dune:Zone.Identifier
+│   ├── pfxVM.ml
+│   └── pfxVM.ml:Zone.Identifier
+├── test.expr
 └── utils
     ├── dune
-    ├── location.ml: module offering a data type for a location in a file
-    └── location.mli
+    ├── dune:Zone.Identifier
+    ├── location.ml
+    ├── location.ml:Zone.Identifier
+    ├── location.mli
+    └── location.mli:Zone.Identifier
 ===============
 
 Progress
 --------
 
-- (10/03/2026) We complited the excersises 1, 2, 3, and beging the 4
+- (10/03/2026) Exercises 1–3 completed (introduction, stack understanding, semantics)
+- (12/03/2026) Implemented AST and evaluation of expressions (exercise 4)
+- (14/03/2026) Implemented lexer and parser for Expr (exercise 5)
+- (17/03/2026) Parser fully working and tested with multiple expressions (exercise 6)
 
 
 ===============
 
 How to test
 
-echo "<expression>" > test.expr && dune exec expr/main.exe test.expr
+Quick testing from terminal:
+
+  echo "<expression>" > test.expr && dune exec expr/main.exe test.expr
+  dune exec expr/main.exe test.expr
+
+Examples to test:
+
+  3+4
+  3+4*5
+  (3+4)*5
+  -(5+2)
 ===============
 
 Know bugs and issues
@@ -126,21 +282,14 @@ Know bugs and issues
 Helpful resources
 -----------------
 
-- we used Stack Overflow to solve the problem of xxx :
-  https://stackoverflow/xxxxxxi
-  https://stackoverflow/yyyyyy
-- someone on GitHub provided an interesting example very similar to the answer of the question x.y : https://github.com/xxxx
-- …
+- OCaml documentation
+- Course notes on compilation
+- Stack Overflow for understanding Menhir and dune errors
 
 ===============
 
 Difficulties
 ------------
 
-- team programming: having to use a VCS such as git and avoiding conflicts
-- thinking functional
-- changing habits by using an unknown language
-- Not a single difficulty: the project was so easy that my 8-old brother did it
-  completely; the Ocaml language is so nice I enjoyed the project, …
 - …
 
