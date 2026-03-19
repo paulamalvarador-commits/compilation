@@ -11,4 +11,6 @@ type token =
   | ADD
 val menhir_begin_marker : int
 val xv_program : Ast.program
+val xv_commands : Ast.command list
+val xv_command : Ast.command
 val menhir_end_marker : int

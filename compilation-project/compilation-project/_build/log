@@ -1,4 +1,4 @@
-# dune exec ./pfx/basic/testLexer.exe -- pfx/basic/tests/ok_prog.pfx
+# dune exec ./pfx/pfxVM.exe -- pfx/basic/tests/t9_args_add.pfx -a 3 -a 4
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location: /home/paula/.cache/dune/db
@@ -13,4 +13,4 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /usr/bin/ocamlc.opt -config > /tmp/dune_152233_output
+$ /usr/bin/ocamlc.opt -config > /tmp/dune_2b2226_output
