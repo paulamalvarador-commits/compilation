@@ -1,9 +1,12 @@
 {
   open Parser
 
-  let mk_int nb =
-    try INT (int_of_string nb)
-    with Failure _ -> failwith (Printf.sprintf "Illegal integer '%s': " nb)
+
+  let mk_int lexbuf nb =
+  try INT (int_of_string nb)
+  with Failure _ ->
+    let loc = Utils.Location.curr lexbuf in
+    raise (Utils.Location.Error ("Illegal integer " ^ nb, loc))
 }
 
 let newline = (['\n' '\r'] | "\r\n")
@@ -13,7 +16,7 @@ let digit = ['0'-'9']
 
 rule token = parse
   (* newlines *)
-  | newline { token lexbuf }
+  | newline { Utils.Location.incr_line lexbuf; token lexbuf }
   (* blanks *)
   | blank + { token lexbuf }
   (* end of file *)
@@ -21,7 +24,7 @@ rule token = parse
   (* comments *)
   | "--" not_newline_char*  { token lexbuf }
   (* integers *)
-  | digit+ as nb           { mk_int nb }
+  | digit+ as nb { mk_int lexbuf nb }
   (* commands  *)
   | "push"                 { PUSH }
   | "pop"                  { POP }
@@ -32,4 +35,7 @@ rule token = parse
   | "div"                  { DIV }
   | "rem"                  { REM }
   (* illegal characters *)
-  | _ as c                  { failwith (Printf.sprintf "Illegal character '%c': " c) }
+  | _ as c {
+    let loc = Utils.Location.curr lexbuf in
+    raise (Utils.Location.Error (Printf.sprintf "Illegal character '%c'" c, loc))
+}

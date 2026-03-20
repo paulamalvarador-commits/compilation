@@ -251,6 +251,7 @@ Progress
 - (12/03/2026) Implemented AST and evaluation of expressions (exercise 4)
 - (14/03/2026) Implemented lexer and parser for Expr (exercise 5)
 - (17/03/2026) Parser fully working and tested with multiple expressions (exercise 6)
+- (18/03/2026) Modified lexer files to return the location of errors (exercise 7)
 
 
 ===============

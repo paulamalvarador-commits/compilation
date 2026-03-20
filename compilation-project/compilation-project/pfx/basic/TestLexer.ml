@@ -23,7 +23,13 @@ let test_lexer file =
   print_endline ("File " ^ file ^ " is being treated!");
   let ic = open_in file in
   let lexbuf = Lexing.from_channel ic in
-  print_tokens lexbuf;
+  Utils.Location.init lexbuf file;
+  try
+    print_tokens lexbuf
+  with Utils.Location.Error (msg, loc) ->
+    Printf.printf "Raised error: %s\n" msg;
+    Utils.Location.print loc
+  ;
   close_in ic
 
 let () =

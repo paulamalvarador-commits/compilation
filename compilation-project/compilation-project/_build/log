@@ -1,9 +1,10 @@
-# dune exec ./pfx/basic/testLexer.exe -- pfx/basic/tests/ok_prog.pfx
+# dune exec pfx/basic/testLexer.exe pfx/basic/tests/error_prog.pfx
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
-# Shared cache location: /home/paula/.cache/dune/db
-# Workspace root: /home/paula/workspace/compilation-project/compilation-project
-# Auto-detected concurrency: 8
+# Shared cache location: /home/igor_/.cache/dune/db
+# Workspace root:
+# /mnt/c/Users/igor_/LALOG/compilation/compilation-project/compilation-project
+# Auto-detected concurrency: 12
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -13,4 +14,4 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /usr/bin/ocamlc.opt -config > /tmp/dune_152233_output
+$ /home/igor_/.opam/4.14.1/bin/ocamlc.opt -config > /tmp/dune_ef2799_output
