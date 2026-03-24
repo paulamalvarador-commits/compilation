@@ -7,7 +7,7 @@ AUTHORS
 
 ===============
 
-Description of the project
+### Description of the project
 --------------------------
 
 This μ-project consists in building a simple compiler for arithmetic expressions.
@@ -28,14 +28,14 @@ Up to exercise 6, we focused on parsing and evaluating expressions.
 
 ===============
 
-Sources
+### Sources
 -------
 
 Git repository: https://github.com/paulamalvarador-commits/compilation
 
 ===============
 
-How to…
+### How to…
 -------
 
 …retrieve the sources?
@@ -52,10 +52,48 @@ To evaluate an expression:
 
   dune exec expr/main.exe expr/basic/tests/an_example.expr
 
-To quickly test:
+===============
 
-  echo "3+4*5" > test.expr
-  dune exec expr/main.exe test.expr
+### Running tests
+-------------
+
+We created a small test suite to validate the behavior of our Pfx virtual machine.  
+Each test is stored in a separate `.pfx` file located in:
+
+pfx/basic/tests/
+
+### Running a single test
+
+To execute one test file, use:
+
+  dune exec ./pfx/pfxVM.exe -- pfx/basic/tests/<test_file>.pfx
+
+Example:
+
+  dune exec ./pfx/pfxVM.exe -- pfx/basic/tests/t2_add.pfx
+
+
+### Running all tests automatically
+
+We provide a script `run_tests.sh` at the root of the project to execute multiple tests:
+
+  ./run_tests.sh
+
+This script runs several predefined test cases and displays their outputs.
+
+### Test coverage
+
+The test suite covers:
+
+- Basic stack operations (`push`, `pop`, `swap`)
+- Arithmetic operations (`add`, `sub`, `mul`, `div`, `rem`)
+- Stack errors (empty stack, insufficient elements)
+- Arithmetic errors (division by zero)
+- Argument handling (correct and incorrect number of arguments)
+- Comments and formatting in input files
+
+===============
+
 
 ===============
 
@@ -252,6 +290,7 @@ Progress
 - (14/03/2026) Implemented lexer and parser for Expr (exercise 5)
 - (17/03/2026) Parser fully working and tested with multiple expressions (exercise 6)
 - (18/03/2026) Modified lexer files to return the location of errors (exercise 7)
+- (19/03/2026) Implemented and validated a test suite for the Pfx VM
 
 
 ===============

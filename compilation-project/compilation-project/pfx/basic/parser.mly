@@ -1,5 +1,6 @@
 %{
   (* Ocaml code here*)
+  open Ast
 
 %}
 
@@ -29,6 +30,21 @@
 
 (* list all rules composing your grammar; obviously your entry point has to be present *)
 
-program: i=INT EOF { i,[] }
+program:
+  | i=INT cmds=commands EOF { (i, cmds) }
+
+commands:
+  |                         { [] }
+  | c=command cs=commands   { c :: cs }
+
+command:
+  | PUSH n=INT              { Push n }
+  | POP                     { Pop }
+  | SWAP                    { Swap }
+  | ADD                     { Add }
+  | SUB                     { Sub }
+  | MUL                     { Mul }
+  | DIV                     { Div }
+  | REM                     { Rem }
 
 %%
