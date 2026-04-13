@@ -8,7 +8,10 @@ type command =
   | Sub 
   | Mul 
   | Div 
-  | Rem 
+  | Rem
+  | Exec
+  | Get
+  | Code of command list 
 
 (* The type for programs *)
 type program = int * command list
@@ -18,3 +21,6 @@ val string_of_command : command -> string
 
 (* Converting a program to a string for printing *)
 val string_of_program : program -> string
+
+(* Converting a list of commands to a string for printing *)
+val string_of_commands : command list -> string

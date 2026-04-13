@@ -3,7 +3,6 @@ AUTHORS
 
 - ALVARADO Paula
 - PUPPIN Igor
-…
 
 ===============
 
@@ -291,7 +290,13 @@ Progress
 - (17/03/2026) Parser fully working and tested with multiple expressions (exercise 6)
 - (18/03/2026) Modified lexer files to return the location of errors (exercise 7)
 - (19/03/2026) Implemented and validated a test suite for the Pfx VM
-
+- (13/04/2026) Exercise 9.3 – Modifications :
+    AST: added Code, Exec, Get
+    Lexer: added tokens ( ) exec get + error locations
+    Parser: added executable sequences ( ... ) and new commands
+    Stack: changed to heterogeneous (VInt | VCode)
+    Eval: implemented semantics for Code, Exec, Get
+    Tests: validated with dune exec pfx/pfxVM.exe
 
 ===============
 
@@ -308,6 +313,9 @@ Examples to test:
   3+4*5
   (3+4)*5
   -(5+2)
+
+Exercice 9.3:
+  dune exec pfx/pfxVM.exe pfx/basic/tests/9.3_test.pfx
 ===============
 
 Know bugs and issues
