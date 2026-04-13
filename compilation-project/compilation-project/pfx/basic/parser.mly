@@ -12,6 +12,8 @@
 
 %token EOF
 %token PUSH POP SWAP ADD SUB MUL DIV REM
+%token EXEC GET
+%token LPAREN RPAREN
 %token <int> INT
 
 
@@ -46,5 +48,8 @@ command:
   | MUL                     { Mul }
   | DIV                     { Div }
   | REM                     { Rem }
+  | EXEC                    { Exec }
+  | GET                     { Get }
+  | LPAREN cmds=commands RPAREN { Code cmds }
 
 %%

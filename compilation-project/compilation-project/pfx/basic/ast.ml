@@ -8,13 +8,17 @@ type command =
   | Sub 
   | Mul 
   | Div 
-  | Rem 
+  | Rem
+  | Exec
+  | Get
+  | Code of command list
     
 type program = int * command list
 
 (* add here all useful functions and types  related to the AST: for instance  string_of_ functions *)
 
-let string_of_command = function
+
+let rec string_of_command = function
   | Push n -> "push " ^ string_of_int n
   | Pop -> "pop"
   | Swap -> "swap"
@@ -23,8 +27,12 @@ let string_of_command = function
   | Mul -> "mul"
   | Div -> "div"
   | Rem -> "rem"
+  | Exec -> "exec"
+  | Get -> "get"
+  | Code cmds -> "(" ^ string_of_commands cmds ^ ")"
 
-let string_of_commands cmds = String.concat " " (List.map string_of_command cmds)
+and string_of_commands cmds =
+  String.concat " " (List.map string_of_command cmds)
 
 let string_of_program (args, cmds) = Printf.sprintf "%i args: %s\n" args (string_of_commands cmds)
 

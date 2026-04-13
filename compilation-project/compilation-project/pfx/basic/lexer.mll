@@ -23,6 +23,10 @@ rule token = parse
   | eof      { EOF }
   (* comments *)
   | "--" not_newline_char*  { token lexbuf }
+  | "(" { LPAREN }
+  | ")" { RPAREN }
+  | "exec" { EXEC }
+  | "get"  { GET }
   (* integers *)
   | digit+ as nb { mk_int lexbuf nb }
   (* commands  *)

@@ -11,6 +11,10 @@ let string_of_token = function
   | Parser.MUL -> "MUL"
   | Parser.DIV -> "DIV"
   | Parser.REM -> "REM"
+  | Parser.EXEC -> "EXEC"
+  | Parser.GET -> "GET"
+  | Parser.LPAREN -> "LPAREN"
+  | Parser.RPAREN -> "RPAREN"
 
 let rec print_tokens lexbuf =
   let tok = Lexer.token lexbuf in
