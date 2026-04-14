@@ -290,13 +290,19 @@ Progress
 - (17/03/2026) Parser fully working and tested with multiple expressions (exercise 6)
 - (18/03/2026) Modified lexer files to return the location of errors (exercise 7)
 - (19/03/2026) Implemented and validated a test suite for the Pfx VM
-- (13/04/2026) Exercise 9.3 – Modifications :
+- (13/04/2026) Exercise 9.3 – Modifications:
     AST: added Code, Exec, Get
     Lexer: added tokens ( ) exec get + error locations
     Parser: added executable sequences ( ... ) and new commands
     Stack: changed to heterogeneous (VInt | VCode)
     Eval: implemented semantics for Code, Exec, Get
     Tests: validated with dune exec pfx/pfxVM.exe
+- (14/04/2026) Exercise 10.3 - Modifications:
+    Extended the AST with Fun and App constructors.
+    Updated ast.ml and ast.mli accordingly.
+    Implemented environment-based code generation (generate_aux).
+    Added support for variables (Get), functions (Code), and application (Exec, Pop).
+    Introduced a wrapper generate function for compatibility.
 
 ===============
 

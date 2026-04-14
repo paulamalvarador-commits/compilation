@@ -4,6 +4,8 @@ type expression =
   | Var of string
   | Binop of BinOp.t * expression * expression
   | Uminus of expression
+  | App of expression * expression
+  | Fun of string * expression
 
 (* Converting an expression to a string for printing *)
 val string_of_expr : expression -> string
