@@ -3,6 +3,8 @@ type expression =
   | Var of string
   | Binop of BinOp.t * expression * expression
   | Uminus of expression
+  | App of expression * expression
+  | Fun of string * expression
 
 let rec string_of_expr exp =
   match exp with
@@ -11,3 +13,8 @@ let rec string_of_expr exp =
   | Binop(op, e1, e2) ->
       "(" ^(string_of_expr e1)^ (BinOp.string_of op) ^(string_of_expr e2)^ ")"
   | Uminus e -> "( -"^(string_of_expr e)^ ")"
+  | App (e1, e2) ->
+    "(" ^ string_of_expr e1 ^ " " ^ string_of_expr e2 ^ ")"
+
+  | Fun (x, e) ->
+    "(fun " ^ x ^ " -> " ^ string_of_expr e ^ ")"

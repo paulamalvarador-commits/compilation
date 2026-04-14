@@ -12,3 +12,7 @@ let rec eval env = function
        | _, v -> (BinOp.eval op) (eval env e1) v
      end
   | Uminus e -> - (eval env e)
+  | App (_, _) ->
+    raise (RuntimeError "Functions not supported in eval")
+  | Fun (_, _) ->
+    raise (RuntimeError "Functions not supported in eval")

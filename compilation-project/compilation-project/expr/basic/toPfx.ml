@@ -3,29 +3,56 @@ open BinOp
 
 module PAst = BasicPfx.Ast
 
-let rec generate expr =
+(* Shift environment: increment all positions by 1 *)
+let shift_env env =
+  List.map (fun (x, i) -> (x, i + 1)) env
+
+(* Main recursive function with environment *)
+let rec generate_aux env expr =
   match expr with
-  | Const n -> [PAst.Push n]
-  | Binop(op, e1, e2) ->
+  | Const n ->
+      [PAst.Push n]
+
+  | Var x ->
+      let i =
+        try List.assoc x env
+        with Not_found -> failwith ("Unbound variable: " ^ x)
+      in
+      [PAst.Push i; PAst.Get]
+
+  | Binop (op, e1, e2) ->
       begin
         match op with
         | Badd ->
-            generate e1 @ generate e2 @ [PAst.Add]
+            generate_aux env e1 @ generate_aux env e2 @ [PAst.Add]
 
         | Bsub ->
-            generate e1 @ generate e2 @ [PAst.Swap; PAst.Sub]
+            generate_aux env e1 @ generate_aux env e2 @ [PAst.Swap; PAst.Sub]
 
         | Bmul ->
-            generate e1 @ generate e2 @ [PAst.Mul]
+            generate_aux env e1 @ generate_aux env e2 @ [PAst.Mul]
 
         | Bdiv ->
-            generate e1 @ generate e2 @ [PAst.Swap; PAst.Div]
+            generate_aux env e1 @ generate_aux env e2 @ [PAst.Swap; PAst.Div]
 
         | Bmod ->
-            generate e1 @ generate e2 @ [PAst.Swap; PAst.Rem]
+            generate_aux env e1 @ generate_aux env e2 @ [PAst.Swap; PAst.Rem]
       end
+
   | Uminus e ->
       [PAst.Push 0]
-      @ generate e
+      @ generate_aux env e
       @ [PAst.Swap; PAst.Sub]
-  | Var x -> failwith ("Variables not supported yet: " ^ x)
+
+  | Fun (x, e) ->
+      let env' = (x, 0) :: shift_env env in
+      [PAst.Code (generate_aux env' e)]
+
+  | App (e1, e2) ->
+      generate_aux env e2 @   (* argument *)
+      generate_aux env e1 @   (* function *)
+      [PAst.Exec; PAst.Pop]
+
+(* Wrapper function (used externally) *)
+let generate expr =
+  generate_aux [] expr
